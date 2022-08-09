@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ProductService implements IProductService {
+public class  ProductService implements IProductService {
 
     private final IProductRepository productRepository;
     private final ICategoryRepository categoryRepository;
@@ -42,7 +42,7 @@ public class ProductService implements IProductService {
 
         Category category = categoryRepository.findByName(categoryName);
         Product product = productRepository.findByName(productName);
-
         product.setCategory(category);
+        productRepository.save(product);
     }
 }
