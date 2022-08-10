@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Admin;
 import com.example.demo.service.AdminService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class AdminController {
 
     private final AdminService adminService;

@@ -18,19 +18,12 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String email;
-
     private String password;
-
     private String full_name;
-
     private String billing_address;
-
     private String default_shipping_address;
-
     private String country;
-
     private String phone;
 
 }
