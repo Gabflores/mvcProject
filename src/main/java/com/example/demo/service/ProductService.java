@@ -36,10 +36,28 @@ public class  ProductService implements IProductService {
         log.info("Buscando todos los productos de la base de datos");
         return productRepository.findAll();
     }
-
+   @Override
+   public Product updateProduct(Product body,Long idProduct){
+        Optional <Product> foundProduct = productRepository.findById(idProduct);
+        if(foundProduct.isPresent()){
+            log.info("Se actualizará el producto con id :"+idProduct);
+            Product updatedProduct = foundProduct.get();
+            updatedProduct.setId(idProduct);
+            updatedProduct.setSKU(body.getSKU());
+            updatedProduct.setName(body.getName());
+            updatedProduct.setPrice(body.getPrice());
+            updatedProduct.setWeight(body.getWeight());
+            updatedProduct.setDescription(body.getDescription());
+            updatedProduct.setImage(body.getImage());
+            updatedProduct.setCategory(body.getCategory());
+            updatedProduct.setCreate_date(body.getCreate_date());
+            updatedProduct.setStock(body.getStock());
+            return productRepository.save(updatedProduct);
+        }
+        return null;
+   }
     @Override
     public void addCategoryToProduct(String categoryName, String productName) {
-
         Category category = categoryRepository.findByName(categoryName);
         Product product = productRepository.findByName(productName);
         product.setCategory(category);
