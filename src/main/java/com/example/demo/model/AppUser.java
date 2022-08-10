@@ -10,24 +10,16 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name="userID")
-    private AppUser user;
+    private String username;
+    private String password;
 
-    private String full_name;
-
-    private String billing_address;
-
-    private String default_shipping_address;
-
-    private String country;
-
-    private String phone;
-
+    @ManyToOne
+    @JoinColumn(name="roleId",nullable = false)
+    private Role role;
 }

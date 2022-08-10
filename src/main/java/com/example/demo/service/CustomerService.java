@@ -18,14 +18,14 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Customer saveCustomer(Customer customer) {
-        log.info("Guardando un nuevo cliente {} en la base de datos", customer.getEmail());
+        log.info("Guardando un nuevo cliente {} en la base de datos", customer.getUser().getUsername());
         return customerRepository.save(customer);
     }
 
     @Override
-    public Optional<Customer> getCustomer(String email) {
-        log.info("Buscando cliente {} en la base de datos", email);
-        return Optional.ofNullable(customerRepository.findByEmail(email));
+    public Optional<Customer> getCustomer(String userID) {
+        log.info("Buscando cliente {} en la base de datos", userID);
+        return Optional.ofNullable(customerRepository.findByUser(userID));
     }
 
     @Override
