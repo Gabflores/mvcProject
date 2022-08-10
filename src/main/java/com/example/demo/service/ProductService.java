@@ -38,6 +38,8 @@ public class  ProductService implements IProductService {
     }
    @Override
    public Product updateProduct(Product body,Long idProduct){
+        /* looks up product by id if exists, asigns id and info from body
+         to new product "updatedProducts" else , returns null*/
         Optional <Product> foundProduct = productRepository.findById(idProduct);
         if(foundProduct.isPresent()){
             log.info("Se actualizará el producto con id :"+idProduct);

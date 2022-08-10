@@ -20,7 +20,7 @@ public class PurchaseOrder {
     @JoinColumn(name = "customerID", nullable = false)
     private Customer customer;
 
-    private Integer ammount;
+    private Integer amount;
 
     private String shipping_address;
 
@@ -32,3 +32,5 @@ public class PurchaseOrder {
 
     private String order_status;
 }
+
+
