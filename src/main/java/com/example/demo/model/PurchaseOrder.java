@@ -18,7 +18,7 @@ public class PurchaseOrder {
 
     @ManyToOne
     @JoinColumn(name = "customerID", nullable = false)
-    private Customer customer;
+    private CustomerData customerData;
 
     private Integer ammount;
 

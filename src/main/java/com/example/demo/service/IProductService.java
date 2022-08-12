@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.data.ApiResponse;
+import com.example.demo.data.ProductCard;
 import com.example.demo.model.Product;
 
 import javax.swing.text.html.Option;
@@ -8,11 +10,13 @@ import java.util.Optional;
 
 public interface IProductService {
 
-    Product saveProduct(Product product);
+    ApiResponse<Long> saveProduct(Product product);
 
-    Optional<Product> getProduct(String name);
+    ApiResponse<Product> getProduct(Long id);
 
     List<Product> getProducts();
+
+    ApiResponse<List<ProductCard>> getProductCards();
 
     void addCategoryToProduct(String categoryName, String productName);
 }

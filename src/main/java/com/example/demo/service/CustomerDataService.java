@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Customer;
-import com.example.demo.repository.ICustomerRepository;
+import com.example.demo.model.CustomerData;
+import com.example.demo.repository.ICustomerDataRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,24 +12,24 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class CustomerService implements ICustomerService {
+public class CustomerDataService implements ICustomerDataService {
 
-    private final ICustomerRepository customerRepository;
+    private final ICustomerDataRepository customerRepository;
 
     @Override
-    public Customer saveCustomer(Customer customer) {
-        log.info("Guardando un nuevo cliente {} en la base de datos", customer.getUser().getUsername());
-        return customerRepository.save(customer);
+    public CustomerData saveCustomer(CustomerData customerData) {
+        log.info("Guardando un nuevo cliente {} en la base de datos", customerData.getUser().getUsername());
+        return customerRepository.save(customerData);
     }
 
     @Override
-    public Optional<Customer> getCustomer(String userID) {
+    public Optional<CustomerData> getCustomer(String userID) {
         log.info("Buscando cliente {} en la base de datos", userID);
         return Optional.ofNullable(customerRepository.findByUser(userID));
     }
 
     @Override
-    public List<Customer> getCustomers() {
+    public List<CustomerData> getCustomers() {
         log.info("Buscando todos los clientes de la base de datos");
         return customerRepository.findAll();
     }

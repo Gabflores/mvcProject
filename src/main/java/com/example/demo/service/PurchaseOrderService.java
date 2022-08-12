@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.PurchaseOrder;
-import com.example.demo.repository.ICustomerRepository;
+import com.example.demo.repository.ICustomerDataRepository;
 import com.example.demo.repository.IPurchaseOrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import java.util.Optional;
 public class PurchaseOrderService implements IPurchaseOrderService {
 
     private final IPurchaseOrderRepository purchaseOrderRepository;
-    private final ICustomerRepository customerRepository;
+    private final ICustomerDataRepository customerRepository;
 
     @Override
     public PurchaseOrder savePurchaseOrder(PurchaseOrder order) {
