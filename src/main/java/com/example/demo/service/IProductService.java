@@ -19,4 +19,8 @@ public interface IProductService {
     ApiResponse<List<ProductCard>> getProductCards();
 
     void addCategoryToProduct(String categoryName, String productName);
+
+    ApiResponse<Long> editProduct(Long id, Product product);
+
+    ApiResponse<Long> deleteProduct(Long id);
 }

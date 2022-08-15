@@ -8,8 +8,10 @@ import com.example.demo.repository.ICategoryRepository;
 import com.example.demo.repository.IProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +66,7 @@ public class ProductService implements IProductService {
         }
 
 
-        return new ApiResponse<List<ProductCard>>(true,productCards,null);
+        return new ApiResponse<List<ProductCard>>(true, productCards, null);
     }
 
     @Override
@@ -73,5 +75,40 @@ public class ProductService implements IProductService {
         Product product = productRepository.findByName(productName);
         product.setCategory(category);
     }
+
+    @Override
+    public ApiResponse<Long> editProduct(Long id, Product productData) {
+        Optional<Product> updateProduct = productRepository.findById(id);
+        if (updateProduct.isEmpty())
+            return new ApiResponse<Long>(false, null, "Producto no existe en la base de datos");
+
+        Optional<Category> category = Optional.ofNullable(categoryRepository.findByName(productData.getCategory().getName()));
+        if (category.isEmpty())
+            return new ApiResponse<Long>(false, null, "Categoria no encontrada en la base de datos");
+
+        updateProduct.get().setSku(productData.getSku());
+        updateProduct.get().setName(productData.getName());
+        updateProduct.get().setPrice(productData.getPrice());
+        updateProduct.get().setWeight(productData.getWeight());
+        updateProduct.get().setDescription(productData.getDescription());
+        updateProduct.get().setImage(productData.getImage());
+        updateProduct.get().setCategory(category.get());
+        updateProduct.get().setStock(productData.getStock());
+
+        productRepository.save(updateProduct.get());
+        return new ApiResponse<Long>(true, updateProduct.get().getId(), null);
+    }
+
+    @Override
+    public ApiResponse<Long> deleteProduct(Long id) {
+        Optional<Product> productToDelete = productRepository.findById(id);
+        if (productToDelete.isEmpty())
+            return new ApiResponse<Long>(false, null, "Producto no encontrado en la base de datos");
+
+        productRepository.delete(productToDelete.get());
+
+        return new ApiResponse<Long>(true, null, null);
+    }
+
 
 }
